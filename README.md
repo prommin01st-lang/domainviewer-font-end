@@ -63,7 +63,7 @@ cp .env.example .env.local
 
 | Variable | Description | Default |
 | --- | --- | --- |
-| `NEXT_PUBLIC_API_URL` | Backend API Base URL | `http://localhost:5000/api` |
+| API Proxy | Backend calls proxied via Next.js rewrites | Configured in `next.config.ts` |
 
 > ตัวแปรทั้งหมดต้องขึ้นต้นด้วย `NEXT_PUBLIC_` เพื่อให้เข้าถึงได้จาก Browser
 > `.env.local` ถูก `.gitignore` บล็อกไม่ให้ขึ้น Git อยู่แล้ว
