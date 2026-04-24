@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #C8E6C9; }
+      .panda-fur { fill: #FFF; }
+      .panda-patch { fill: #212121; }
+      .panda-eye { fill: #FFF; }
+      .panda-pupil { fill: #212121; }
+      .panda-nose { fill: #212121; }
+      .panda-ear { fill: #212121; }
+      .panda-blush { fill: #FFAB91; opacity: 0.4; }
+    </style>
+  </defs>
+  <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+  <circle class="panda-ear" cx="58" cy="55" r="18"/>
+  <circle class="panda-ear" cx="142" cy="55" r="18"/>
+  <circle class="panda-fur" cx="100" cy="108" r="52"/>
+  <ellipse class="panda-patch" cx="75" cy="95" rx="18" ry="16"/>
+  <ellipse class="panda-patch" cx="125" cy="95" rx="18" ry="16"/>
+  <circle class="panda-eye" cx="78" cy="92" r="6"/>
+  <circle class="panda-eye" cx="122" cy="92" r="6"/>
+  <circle class="panda-pupil" cx="79" cy="91" r="3"/>
+  <circle class="panda-pupil" cx="123" cy="91" r="3"/>
+  <ellipse class="panda-nose" cx="100" cy="108" rx="10" ry="7"/>
+  <ellipse class="panda-blush" cx="65" cy="115" r="7" ry="4"/>
+  <ellipse class="panda-blush" cx="135" cy="115" r="7" ry="4"/>
+  <path d="M97 115 Q100 119 103 115" stroke="#FFF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M88 125 Q100 133 112 125" stroke="#424242" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

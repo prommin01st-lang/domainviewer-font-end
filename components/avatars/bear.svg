@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #FFB74D; }
+      .bear-fur { fill: #8D6E63; }
+      .bear-fur-light { fill: #A1887F; }
+      .bear-snout { fill: #D7CCC8; }
+      .bear-nose { fill: #4E342E; }
+      .bear-eye { fill: #3E2723; }
+      .bear-blush { fill: #FFAB91; opacity: 0.6; }
+    </style>
+  </defs>
+  <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+  <ellipse class="bear-fur-light" cx="55" cy="55" rx="22" ry="22"/>
+  <ellipse class="bear-fur-light" cx="145" cy="55" rx="22" ry="22"/>
+  <ellipse class="bear-fur-light" cx="55" cy="55" rx="14" ry="14"/>
+  <ellipse class="bear-fur-light" cx="145" cy="55" rx="14" ry="14"/>
+  <circle class="bear-fur" cx="100" cy="110" r="60"/>
+  <ellipse class="bear-fur" cx="55" cy="75" rx="30" ry="25"/>
+  <ellipse class="bear-fur" cx="145" cy="75" rx="30" ry="25"/>
+  <ellipse class="bear-snout" cx="100" cy="118" rx="28" ry="22"/>
+  <ellipse class="bear-fur-light" cx="100" cy="108" rx="18" ry="12"/>
+  <ellipse class="bear-nose" cx="100" cy="112" rx="10" ry="7"/>
+  <circle class="bear-eye" cx="82" cy="95" r="5"/>
+  <circle class="bear-eye" cx="118" cy="95" r="5"/>
+  <circle fill="#FFF" cx="83.5" cy="93" r="1.8"/>
+  <circle fill="#FFF" cx="119.5" cy="93" r="1.8"/>
+  <circle class="bear-blush" cx="68" cy="108" r="7"/>
+  <circle class="bear-blush" cx="132" cy="108" r="7"/>
+  <path d="M97 118 Q100 122 103 118" stroke="#4E342E" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M88 130 Q100 138 112 130" stroke="#4E342E" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

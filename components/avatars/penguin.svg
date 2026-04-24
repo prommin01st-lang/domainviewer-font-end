@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #B0BEC5; }
+      .penguin-body { fill: #37474F; }
+      .penguin-belly { fill: #FFF; }
+      .penguin-eye { fill: #212121; }
+      .penguin-beak { fill: #FF9800; }
+      .penguin-blush { fill: #FFAB91; opacity: 0.5; }
+      .penguin-foot { fill: #FF9800; }
+    </style>
+  </defs>
+  <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+  <ellipse class="penguin-body" cx="100" cy="108" r="45" ry="56"/>
+  <ellipse class="penguin-belly" cx="100" cy="115" rx="30" ry="40"/>
+  <ellipse class="penguin-foot" cx="80" cy="162" rx="14" ry="8"/>
+  <ellipse class="penguin-foot" cx="120" cy="162" rx="14" ry="8"/>
+  <circle class="penguin-eye" cx="85" cy="88" r="7"/>
+  <circle class="penguin-eye" cx="115" cy="88" r="7"/>
+  <circle fill="#FFF" cx="87" cy="86" r="3"/>
+  <circle fill="#FFF" cx="117" cy="86" r="3"/>
+  <polygon class="penguin-beak" points="100,98 92,112 108,112"/>
+  <ellipse class="penguin-blush" cx="72" cy="105" r="6" ry="3"/>
+  <ellipse class="penguin-blush" cx="128" cy="105" r="6" ry="3"/>
+  <ellipse class="penguin-body" cx="55" cy="105" rx="14" ry="26"/>
+  <ellipse class="penguin-body" cx="145" cy="105" rx="14" ry="26"/>
+</svg>

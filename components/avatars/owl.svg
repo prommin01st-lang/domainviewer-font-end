@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #CE93D8; }
+      .owl-body { fill: #8D6E63; }
+      .owl-belly { fill: #D7CCC8; }
+      .owl-eye-outer { fill: #FFF9C4; }
+      .owl-eye { fill: #212121; }
+      .owl-beak { fill: #FF9800; }
+      .owl-blush { fill: #FFAB91; opacity: 0.5; }
+      .owl-wing { fill: #6D4C41; }
+      .owl-feather { fill: #6D4C41; }
+    </style>
+  </defs>
+  <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+  <ellipse class="owl-wing" cx="42" cy="115" rx="18" ry="32"/>
+  <ellipse class="owl-wing" cx="158" cy="115" rx="18" ry="32"/>
+  <ellipse class="owl-body" cx="100" cy="112" r="50" ry="54"/>
+  <ellipse class="owl-belly" cx="100" cy="125" rx="30" ry="32"/>
+  <circle class="owl-eye-outer" cx="76" cy="90" r="24"/>
+  <circle class="owl-eye-outer" cx="124" cy="90" r="24"/>
+  <circle class="owl-eye" cx="76" cy="90" r="14"/>
+  <circle class="owl-eye" cx="124" cy="90" r="14"/>
+  <circle fill="#FFF" cx="72" cy="85" r="5"/>
+  <circle fill="#FFF" cx="120" cy="85" r="5"/>
+  <polygon class="owl-beak" points="100,102 92,116 108,116"/>
+  <ellipse class="owl-blush" cx="55" cy="110" r="6" ry="3"/>
+  <ellipse class="owl-blush" cx="145" cy="110" r="6" ry="3"/>
+  <line x1="85" y1="60" x2="85" y2="45" stroke="#6D4C41" stroke-width="2" stroke-linecap="round"/>
+  <line x1="115" y1="60" x2="115" y2="45" stroke="#6D4C41" stroke-width="2" stroke-linecap="round"/>
+  <ellipse class="owl-feather" cx="100" cy="60" rx="8" ry="5"/>
+  <path d="M88 140 Q100 148 112 140" stroke="#6D4C41" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M90 148 Q100 154 110 148" stroke="#6D4C41" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>

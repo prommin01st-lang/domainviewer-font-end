@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #C5E1A5; }
+      .dog-fur { fill: #FFCC80; }
+      .dog-fur-white { fill: #FFF8E1; }
+      .dog-ear { fill: #8D6E63; }
+      .dog-eye { fill: #3E2723; }
+      .dog-nose { fill: #3E2723; }
+      .dog-blush { fill: #FFAB91; opacity: 0.5; }
+    </style>
+  </defs>
+      <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+<polygon class="dog-ear" points="45,55 30,20 75,45"/>
+  <polygon class="dog-ear" points="155,55 170,20 125,45"/>
+  <polygon class="dog-fur-white" points="52,52 42,28 68,46"/>
+  <polygon class="dog-fur-white" points="148,52 158,28 132,46"/>
+  <circle class="dog-fur" cx="100" cy="110" r="52"/>
+  <ellipse class="dog-fur-white" cx="100" cy="128" rx="20" ry="16"/>
+  <ellipse class="dog-fur" cx="52" cy="95" rx="20" ry="18"/>
+  <ellipse class="dog-fur" cx="148" cy="95" rx="20" ry="18"/>
+  <ellipse class="dog-nose" cx="100" cy="115" rx="14" ry="10"/>
+  <ellipse class="dog-fur-white" cx="100" cy="110" rx="8" ry="5"/>
+  <ellipse class="dog-eye" cx="78" cy="92" rx="8" ry="10"/>
+  <ellipse class="dog-eye" cx="122" cy="92" rx="8" ry="10"/>
+  <circle fill="#FFF" cx="81" cy="88" r="3"/>
+  <circle fill="#FFF" cx="125" cy="88" r="3"/>
+  <ellipse class="dog-blush" cx="65" cy="108" r="7" ry="4"/>
+  <ellipse class="dog-blush" cx="135" cy="108" r="7" ry="4"/>
+  <path d="M94 122 Q100 128 106 122" stroke="#FFF8E1" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M85 132 Q100 142 115 132" stroke="#BF360C" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Native Avatar System - SVG Avatars</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #7f8c8d;
+      font-size: 1.1rem;
+    }
+
+    .control-panel {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .control-panel h2 {
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      color: #2c3e50;
+    }
+
+    .color-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .color-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .color-btn:hover {
+      transform: scale(1.15);
+    }
+
+    .color-btn.active {
+      border-color: #2c3e50;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px #2c3e50;
+    }
+
+    .color-btn span {
+      position: absolute;
+      bottom: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: #666;
+      white-space: nowrap;
+    }
+
+    .custom-color-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .custom-color-row label {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .custom-color-row input[type="color"] {
+      width: 60px;
+      height: 40px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .custom-color-row input[type="text"] {
+      padding: 8px 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      width: 120px;
+    }
+
+    .apply-btn {
+      padding: 8px 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .apply-btn:hover {
+      background: #2980b9;
+    }
+
+    .avatar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .avatar-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .avatar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .avatar-card .svg-wrapper {
+      width: 100%;
+      max-width: 160px;
+      margin: 0 auto 12px;
+    }
+
+    .avatar-card .svg-wrapper svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .avatar-card h3 {
+      font-size: 15px;
+      color: #555;
+      font-weight: 600;
+    }
+
+    .avatar-card .filename {
+      font-size: 12px;
+      color: #999;
+      margin-top: 4px;
+      font-family: monospace;
+    }
+
+    .info-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .info-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      color: #2c3e50;
+    }
+
+    .info-section h3 {
+      font-size: 1rem;
+      margin: 20px 0 10px;
+      color: #555;
+    }
+
+    .info-section p, .info-section li {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .info-section ul {
+      padding-left: 20px;
+    }
+
+    .code-block {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+
+    .code-block .comment { color: #95a5a6; }
+    .code-block .tag { color: #e74c3c; }
+    .code-block .attr { color: #3498db; }
+    .code-block .value { color: #2ecc71; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.8rem; }
+      .avatar-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .color-presets { gap: 20px 10px; padding-bottom: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Native Avatar System</h1>
+      <p>ชุด SVG Avatar สำหรับแอพจัดการแจ้งเตือน Domain &mdash; 12 ตัวละครน่ารัก พร้อมระบบเปลี่ยนสีพื้นหลังได้</p>
+    </header>
+
+    <div class="control-panel">
+      <h2>🎨 เลือกสีพื้นหลัง (Background Color)</h2>
+      <div class="color-presets" id="colorPresets">
+        <button class="color-btn active" data-color="#FFB74D" title="Orange" onclick="changeColor(this.dataset.color, this)"><span>ส้ม</span></button>
+        <button class="color-btn" data-color="#F8BBD9" title="Pink" onclick="changeColor(this.dataset.color, this)"><span>ชมพู</span></button>
+        <button class="color-btn" data-color="#90CAF9" title="Blue" onclick="changeColor(this.dataset.color, this)"><span>ฟ้า</span></button>
+        <button class="color-btn" data-color="#C5E1A5" title="Green" onclick="changeColor(this.dataset.color, this)"><span>เขียว</span></button>
+        <button class="color-btn" data-color="#CE93D8" title="Purple" onclick="changeColor(this.dataset.color, this)"><span>ม่วง</span></button>
+        <button class="color-btn" data-color="#BCAAA4" title="Brown" onclick="changeColor(this.dataset.color, this)"><span>น้ำตาล</span></button>
+        <button class="color-btn" data-color="#B0BEC5" title="Gray" onclick="changeColor(this.dataset.color, this)"><span>เทา</span></button>
+        <button class="color-btn" data-color="#C8E6C9" title="Mint" onclick="changeColor(this.dataset.color, this)"><span>มิ้นท์</span></button>
+        <button class="color-btn" data-color="#FFAB91" title="Coral" onclick="changeColor(this.dataset.color, this)"><span>ปะการัง</span></button>
+        <button class="color-btn" data-color="#80CBC4" title="Teal" onclick="changeColor(this.dataset.color, this)"><span>ทีล</span></button>
+        <button class="color-btn" data-color="#FFF59D" title="Yellow" onclick="changeColor(this.dataset.color, this)"><span>เหลือง</span></button>
+        <button class="color-btn" data-color="#FFCC80" title="Amber" onclick="changeColor(this.dataset.color, this)"><span>อำพัน</span></button>
+      </div>
+      <div class="custom-color-row">
+        <label for="customColor">สีที่กำหนดเอง:</label>
+        <input type="color" id="customColor" value="#FFB74D" onchange="changeColor(this.value)">
+        <input type="text" id="hexInput" placeholder="#FFB74D" value="#FFB74D" onchange="changeColor(this.value)">
+        <button class="apply-btn" onclick="applyCustomColor()">Apply</button>
+      </div>
+    </div>
+
+    <div class="avatar-grid" id="avatarGrid"></div>
+
+    <div class="info-section">
+      <h2>📋 วิธีใช้งาน SVG Avatars</h2>
+
+      <h3>โครงสร้าง SVG</h3>
+      <p>ทุก SVG มี class <code>.avatar-bg</code> สำหรับวงกลมพื้นหลัง คุณสามารถเปลี่ยนสีผ่าน CSS หรือ JavaScript ได้:</p>
+      <div class="code-block">
+<span class="comment">/* เปลี่ยนสีพื้นหลังทั้งหมด */</span>
+<span class="tag">.avatar-bg</span> { <span class="attr">fill</span>: <span class="value">#FF5722</span>; }
+
+<span class="comment">/* หรือ JavaScript */</span>
+<span class="tag">document.querySelectorAll</span>(<span class="value">'.avatar-bg'</span>).<span class="tag">forEach</span>(el => {
+  el.style.fill = <span class="value">'#4CAF50'</span>;
+});
+      </div>
+
+      <h3>รายการ Avatar ทั้งหมด (12 ตัว)</h3>
+      <ul>
+        <li><strong>bear.svg</strong> - หมีน้ำตาล (Brown Bear)</li>
+        <li><strong>cat.svg</strong> - แมวส้ม (Orange Cat)</li>
+        <li><strong>rabbit.svg</strong> - กระต่าย (Bunny)</li>
+        <li><strong>dog.svg</strong> - สุนัขคอร์กี้ (Corgi Dog)</li>
+        <li><strong>elephant.svg</strong> - ช้างฟ้า (Blue Elephant)</li>
+        <li><strong>owl.svg</strong> - นกฮูก (Owl)</li>
+        <li><strong>penguin.svg</strong> - เพนกวิน (Penguin)</li>
+        <li><strong>panda.svg</strong> - แพนด้า (Panda)</li>
+        <li><strong>fox.svg</strong> - จิ้งจอก (Fox)</li>
+        <li><strong>monkey.svg</strong> - ลิง (Monkey)</li>
+        <li><strong>dragon.svg</strong> - มังกรน้อย (Dragon)</li>
+        <li><strong>bird.svg</strong> - นกน้อย (Bird)</li>
+      </ul>
+
+      <h3>ใช้งานใน React/Vue/Angular</h3>
+      <div class="code-block">
+<span class="comment">// React Component Example</span>
+<span class="tag">import</span> { ReactComponent as BearAvatar } <span class="tag">from</span> <span class="value">'./avatars/bear.svg'</span>;
+
+<span class="tag">const</span> <span class="attr">UserAvatar</span> = ({ bgColor }) => (
+  &lt;<span class="tag">div</span> <span class="attr">style</span>={{ '--bg': bgColor }}&gt;
+    &lt;<span class="tag">BearAvatar</span> /&gt;
+  &lt;/<span class="tag">div</span>&gt;
+);
+      </div>
+
+      <h3>คุณสมบัติ</h3>
+      <ul>
+        <li>SVG Vector 100% - รองรับทุกขนาดไม่แตก</li>
+        <li>เปลี่ยนสีพื้นหลังง่ายผ่าน CSS class <code>.avatar-bg</code></li>
+        <li>ขนาดไฟล์เล็ก (แต่ละไฟล์ ~2-4 KB)</li>
+        <li>รองรับ Dark Mode สามารถสลับสีพื้นหลังได้ตามธีม</li>
+        <li>ใช้ Inline SVG เพื่อให้ควบคุมสีผ่าน CSS/JS ได้</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const avatars = [
+      { file: 'bear.svg', name: 'หมีน้ำตาล', en: 'Bear' },
+      { file: 'cat.svg', name: 'แมวส้ม', en: 'Cat' },
+      { file: 'rabbit.svg', name: 'กระต่าย', en: 'Rabbit' },
+      { file: 'dog.svg', name: 'สุนัขคอร์กี้', en: 'Dog' },
+      { file: 'elephant.svg', name: 'ช้างฟ้า', en: 'Elephant' },
+      { file: 'owl.svg', name: 'นกฮูก', en: 'Owl' },
+      { file: 'penguin.svg', name: 'เพนกวิน', en: 'Penguin' },
+      { file: 'panda.svg', name: 'แพนด้า', en: 'Panda' },
+      { file: 'fox.svg', name: 'จิ้งจอก', en: 'Fox' },
+      { file: 'monkey.svg', name: 'ลิง', en: 'Monkey' },
+      { file: 'dragon.svg', name: 'มังกรน้อย', en: 'Dragon' },
+      { file: 'bird.svg', name: 'นกน้อย', en: 'Bird' }
+    ];
+
+    // Initialize color buttons
+    document.querySelectorAll('.color-btn').forEach(btn => {
+      btn.style.backgroundColor = btn.dataset.color;
+    });
+
+    // Load all SVGs into grid
+    async function loadAvatars() {
+      const grid = document.getElementById('avatarGrid');
+      for (const avatar of avatars) {
+        try {
+          const resp = await fetch(avatar.file);
+          let svgText = await resp.text();
+          // Remove xml declaration and add class for styling
+          svgText = svgText.replace(/<\?xml[^?]*\?>/, '');
+          svgText = svgText.replace('<svg', '<svg class="avatar-svg"');
+
+          const card = document.createElement('div');
+          card.className = 'avatar-card';
+          card.innerHTML = `
+            <div class="svg-wrapper">${svgText}</div>
+            <h3>${avatar.name}</h3>
+            <div class="filename">${avatar.file}</div>
+          `;
+          grid.appendChild(card);
+        } catch (e) {
+          console.error('Error loading', avatar.file, e);
+        }
+      }
+    }
+
+    function changeColor(color, btnElement) {
+      // Update active state on preset buttons
+      if (btnElement) {
+        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+        btnElement.classList.add('active');
+      }
+
+      // Update all avatar-bg elements
+      document.querySelectorAll('.avatar-bg').forEach(el => {
+        el.style.fill = color;
+      });
+
+      // Update inputs
+      document.getElementById('customColor').value = color;
+      document.getElementById('hexInput').value = color;
+    }
+
+    function applyCustomColor() {
+      const color = document.getElementById('hexInput').value;
+      document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+      changeColor(color);
+    }
+
+    loadAvatars();
+  </script>
+</body>
+</html>

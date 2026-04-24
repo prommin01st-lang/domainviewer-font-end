@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #BCAAA4; }
+      .monkey-fur { fill: #8D6E63; }
+      .monkey-face { fill: #FFECB3; }
+      .monkey-ear-inner { fill: #FFECB3; }
+      .monkey-eye { fill: #3E2723; }
+      .monkey-nose { fill: #3E2723; }
+      .monkey-blush { fill: #FFAB91; opacity: 0.5; }
+    </style>
+  </defs>
+      <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+<circle class="monkey-fur" cx="48" cy="80" r="18"/>
+  <circle class="monkey-fur" cx="152" cy="80" r="18"/>
+  <circle class="monkey-ear-inner" cx="48" cy="80" r="11"/>
+  <circle class="monkey-ear-inner" cx="152" cy="80" r="11"/>
+  <circle class="monkey-fur" cx="100" cy="108" r="52"/>
+  <ellipse class="monkey-face" cx="100" cy="112" rx="38" ry="32"/>
+  <ellipse class="monkey-nose" cx="100" cy="106" rx="10" ry="7"/>
+  <ellipse fill="#5D4037" cx="100" cy="104" rx="5" ry="3"/>
+  <circle class="monkey-eye" cx="82" cy="95" r="5"/>
+  <circle class="monkey-eye" cx="118" cy="95" r="5"/>
+  <circle fill="#FFF" cx="83" cy="93" r="1.8"/>
+  <circle fill="#FFF" cx="119" cy="93" r="1.8"/>
+  <ellipse class="monkey-blush" cx="70" cy="108" r="7" ry="4"/>
+  <ellipse class="monkey-blush" cx="130" cy="108" r="7" ry="4"/>
+  <path d="M97 114 Q100 118 103 114" stroke="#3E2723" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M88 124 Q100 132 112 124" stroke="#3E2723" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

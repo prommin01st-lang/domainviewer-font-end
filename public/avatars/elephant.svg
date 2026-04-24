@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #90CAF9; }
+      .elephant-body { fill: #64B5F6; }
+      .elephant-ear { fill: #42A5F5; }
+      .elephant-tusk { fill: #FFF9C4; }
+      .elephant-eye { fill: #1A237E; }
+      .elephant-blush { fill: #FF8A80; opacity: 0.4; }
+      .elephant-trunk { fill: #64B5F6; }
+    </style>
+  </defs>
+      <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+<ellipse class="elephant-ear" cx="38" cy="90" rx="28" ry="32"/>
+  <ellipse class="elephant-ear" cx="162" cy="90" rx="28" ry="32"/>
+  <circle class="elephant-body" cx="100" cy="108" r="50"/>
+  <ellipse class="elephant-trunk" cx="100" cy="130" rx="12" ry="28"/>
+  <ellipse class="elephant-trunk" cx="100" cy="150" rx="16" ry="8"/>
+  <ellipse class="elephant-tusk" cx="78" cy="118" rx="7" ry="14" transform="rotate(-20 78 118)"/>
+  <ellipse class="elephant-tusk" cx="122" cy="118" rx="7" ry="14" transform="rotate(20 122 118)"/>
+  <circle class="elephant-eye" cx="78" cy="95" r="5"/>
+  <circle class="elephant-eye" cx="122" cy="95" r="5"/>
+  <circle fill="#FFF" cx="79" cy="93" r="1.8"/>
+  <circle fill="#FFF" cx="123" cy="93" r="1.8"/>
+  <ellipse class="elephant-blush" cx="60" cy="105" r="7" ry="4"/>
+  <ellipse class="elephant-blush" cx="140" cy="105" r="7" ry="4"/>
+  <path d="M95 140 Q100 148 105 140" stroke="#1A237E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>

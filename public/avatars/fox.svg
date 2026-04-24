@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #FFAB91; }
+      .fox-fur { fill: #E65100; }
+      .fox-light { fill: #FFE0B2; }
+      .fox-eye { fill: #212121; }
+      .fox-nose { fill: #212121; }
+      .fox-blush { fill: #FF8A80; opacity: 0.4; }
+    </style>
+  </defs>
+      <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+<polygon class="fox-fur" points="55,75 30,25 85,60"/>
+  <polygon class="fox-fur" points="145,75 170,25 115,60"/>
+  <polygon class="fox-light" points="60,72 42,35 82,62"/>
+  <polygon class="fox-light" points="140,72 158,35 118,62"/>
+  <circle class="fox-fur" cx="100" cy="112" r="48"/>
+  <ellipse class="fox-light" cx="100" cy="112" rx="18" ry="22"/>
+  <polygon class="fox-light" points="100,85 88,115 112,115"/>
+  <circle class="fox-eye" cx="80" cy="95" r="5"/>
+  <circle class="fox-eye" cx="120" cy="95" r="5"/>
+  <circle fill="#FFF" cx="81.5" cy="93" r="1.8"/>
+  <circle fill="#FFF" cx="121.5" cy="93" r="1.8"/>
+  <ellipse class="fox-nose" cx="100" cy="108" rx="8" ry="6"/>
+  <ellipse class="fox-blush" cx="66" cy="110" r="7" ry="4"/>
+  <ellipse class="fox-blush" cx="134" cy="110" r="7" ry="4"/>
+  <path d="M97 114 Q100 118 103 114" stroke="#BF360C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M88 124 Q100 132 112 124" stroke="#BF360C" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

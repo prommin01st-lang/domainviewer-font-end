@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #FFCC80; }
+      .cat-fur { fill: #FF9800; }
+      .cat-fur-light { fill: #FFE0B2; }
+      .cat-stripe { fill: #F57C00; }
+      .cat-eye { fill: #33691E; }
+      .cat-nose { fill: #FF8A80; }
+      .cat-blush { fill: #FFAB91; opacity: 0.5; }
+    </style>
+  </defs>
+      <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+<polygon class="cat-fur" points="65,50 50,15 90,40"/>
+  <polygon class="cat-fur" points="135,50 150,15 110,40"/>
+  <polygon class="cat-fur-light" points="72,48 62,22 85,42"/>
+  <polygon class="cat-fur-light" points="128,48 138,22 115,42"/>
+  <circle class="cat-fur" cx="100" cy="105" r="52"/>
+  <ellipse class="cat-fur" cx="58" cy="80" rx="14" ry="12"/>
+  <ellipse class="cat-fur" cx="142" cy="80" rx="14" ry="12"/>
+  <ellipse class="cat-fur-light" cx="100" cy="115" rx="22" ry="16"/>
+  <ellipse class="cat-nose" cx="100" cy="108" rx="7" ry="5"/>
+  <ellipse class="cat-eye" cx="82" cy="88" rx="9" ry="12"/>
+  <ellipse class="cat-eye" cx="118" cy="88" rx="9" ry="12"/>
+  <circle fill="#FFF" cx="85" cy="84" r="3"/>
+  <circle fill="#FFF" cx="121" cy="84" r="3"/>
+  <ellipse class="cat-blush" cx="68" cy="102" r="6" ry="4"/>
+  <ellipse class="cat-blush" cx="132" cy="102" r="6" ry="4"/>
+  <path d="M97 112 Q100 116 103 112" stroke="#BF360C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <line x1="100" y1="113" x2="100" y2="122" stroke="#BF360C" stroke-width="1.5"/>
+  <line x1="94" y1="118" x2="100" y2="122" stroke="#BF360C" stroke-width="1.5"/>
+  <line x1="106" y1="118" x2="100" y2="122" stroke="#BF360C" stroke-width="1.5"/>
+  <line x1="60" y1="80" x2="40" y2="72" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+  <line x1="60" y1="85" x2="38" y2="82" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+  <line x1="60" y1="90" x2="40" y2="92" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+  <line x1="140" y1="80" x2="160" y2="72" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+  <line x1="140" y1="85" x2="162" y2="82" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+  <line x1="140" y1="90" x2="160" y2="92" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+  <path d="M85 65 Q100 75 115 65" stroke="#F57C00" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M80 72 Q100 82 120 72" stroke="#F57C00" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>

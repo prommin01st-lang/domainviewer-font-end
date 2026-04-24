@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #F8BBD9; }
+      .rabbit-fur { fill: #FFF3E0; }
+      .rabbit-ear-inner { fill: #FFCDD2; }
+      .rabbit-eye { fill: #5D4037; }
+      .rabbit-nose { fill: #FF8A80; }
+      .rabbit-blush { fill: #FFAB91; opacity: 0.5; }
+    </style>
+  </defs>
+  <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+  <ellipse class="rabbit-fur" cx="72" cy="48" rx="14" ry="38"/>
+  <ellipse class="rabbit-fur" cx="128" cy="48" rx="14" ry="38"/>
+  <ellipse class="rabbit-ear-inner" cx="72" cy="50" rx="8" ry="28"/>
+  <ellipse class="rabbit-ear-inner" cx="128" cy="50" rx="8" ry="28"/>
+  <circle class="rabbit-fur" cx="100" cy="118" r="48"/>
+  <ellipse class="rabbit-fur" cx="52" cy="100" rx="16" ry="14"/>
+  <ellipse class="rabbit-fur" cx="148" cy="100" rx="16" ry="14"/>
+  <ellipse class="rabbit-nose" cx="100" cy="114" rx="7" ry="5"/>
+  <circle class="rabbit-eye" cx="82" cy="102" r="5"/>
+  <circle class="rabbit-eye" cx="118" cy="102" r="5"/>
+  <circle fill="#FFF" cx="83" cy="100" r="1.8"/>
+  <circle fill="#FFF" cx="119" cy="100" r="1.8"/>
+  <ellipse class="rabbit-blush" cx="70" cy="115" r="7" ry="4"/>
+  <ellipse class="rabbit-blush" cx="130" cy="115" r="7" ry="4"/>
+  <path d="M97 120 Q100 124 103 120" stroke="#5D4037" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M88 130 Q100 138 112 130" stroke="#5D4037" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <ellipse fill="#FF8A80" opacity="0.3" cx="100" cy="140" rx="12" ry="8"/>
+</svg>

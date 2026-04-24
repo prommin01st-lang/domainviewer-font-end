@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      .avatar-bg { fill: #FFF59D; }
+      .bird-body { fill: #42A5F5; }
+      .bird-belly { fill: #E3F2FD; }
+      .bird-wing { fill: #1E88E5; }
+      .bird-eye { fill: #212121; }
+      .bird-beak { fill: #FFB300; }
+      .bird-blush { fill: #FF8A80; opacity: 0.4; }
+      .bird-hair { fill: #1565C0; }
+    </style>
+  </defs>
+      <circle class="avatar-bg" cx="100" cy="100" r="100"/>
+<polygon class="bird-hair" points="100,48 90,22 108,42"/>
+  <ellipse class="bird-wing" cx="45" cy="115" rx="20" ry="14"/>
+  <ellipse class="bird-wing" cx="155" cy="115" rx="20" ry="14"/>
+  <ellipse class="bird-body" cx="100" cy="108" r="46" ry="50"/>
+  <ellipse class="bird-belly" cx="100" cy="120" rx="28" ry="30"/>
+  <circle class="bird-eye" cx="82" cy="95" r="6"/>
+  <circle class="bird-eye" cx="118" cy="95" r="6"/>
+  <circle fill="#FFF" cx="84" cy="93" r="2.5"/>
+  <circle fill="#FFF" cx="120" cy="93" r="2.5"/>
+  <polygon class="bird-beak" points="100,108 92,122 108,122"/>
+  <ellipse class="bird-blush" cx="68" cy="108" r="7" ry="4"/>
+  <ellipse class="bird-blush" cx="132" cy="108" r="7" ry="4"/>
+  <path d="M90 68 Q100 78 110 68" stroke="#1565C0" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <ellipse class="bird-body" cx="52" cy="95" rx="10" ry="8"/>
+  <ellipse class="bird-body" cx="148" cy="95" rx="10" ry="8"/>
+  <ellipse fill="#FF8A80" opacity="0.3" cx="100" cy="148" rx="12" ry="8"/>
+</svg>
