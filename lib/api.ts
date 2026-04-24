@@ -30,6 +30,12 @@ function isTokenExpiringSoon(): boolean {
 }
 
 function unwrapApiResponse<T>(responseData: unknown): T {
+  // Guard against HTML error pages from proxy
+  if (typeof responseData === "string") {
+    throw new Error(
+      `Proxy returned HTML instead of JSON. Backend may be unreachable. Response: ${responseData.slice(0, 200)}`
+    );
+  }
   if (
     responseData &&
     typeof responseData === "object" &&
@@ -39,6 +45,15 @@ function unwrapApiResponse<T>(responseData: unknown): T {
     return (responseData as { data: T }).data;
   }
   return responseData as T;
+}
+
+export function ensureArray<T>(data: unknown): T[] {
+  if (Array.isArray(data)) return data;
+  if (data && typeof data === "object" && "items" in data && Array.isArray((data as Record<string, unknown>).items)) {
+    return (data as Record<string, unknown>).items as T[];
+  }
+  console.warn("[API] Expected array or PagedList, got:", data);
+  return [];
 }
 
 async function doRefreshToken(): Promise<string | null> {
