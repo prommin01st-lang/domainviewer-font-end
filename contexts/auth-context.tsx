@@ -9,7 +9,7 @@ import {
   useMemo,
   ReactNode,
 } from "react";
-import api from "@/lib/api";
+import api, { refreshTokens } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { User } from "@/lib/types";
 
@@ -50,23 +50,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   const refreshAccessToken = useCallback(async (): Promise<boolean> => {
-    const refreshToken = localStorage.getItem("refreshToken");
-    if (!refreshToken) {
+    try {
+      const result = await refreshTokens();
+      if (result) {
+        if (result.user) setUser(result.user);
+        return true;
+      }
       clearAuth();
       return false;
-    }
-
-    try {
-      const response = await api.post("/auth/refresh-token", { refreshToken });
-      const { accessToken, refreshToken: newRefreshToken, accessTokenExpiresAt, user: userData } =
-        response.data;
-      setAuthData(accessToken, newRefreshToken, accessTokenExpiresAt, userData);
-      return true;
     } catch {
       clearAuth();
       return false;
     }
-  }, [clearAuth, setAuthData]);
+  }, [clearAuth]);
 
   // Check for existing token on mount
   useEffect(() => {
@@ -114,8 +110,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(async (email: string, password: string) => {
     const response = await api.post("/auth/login", { email, password });
-    const { accessToken, refreshToken, accessTokenExpiresAt, user: userData } =
-      response.data;
+    const data = response.data;
+    
+    // Support both camelCase and PascalCase
+    const accessToken = data.accessToken || data.AccessToken;
+    const refreshToken = data.refreshToken || data.RefreshToken;
+    const accessTokenExpiresAt = data.accessTokenExpiresAt || data.AccessTokenExpiresAt;
+    const userData = data.user || data.User;
+
     setAuthData(accessToken, refreshToken, accessTokenExpiresAt, userData);
     router.push("/domains");
   }, [setAuthData, router]);

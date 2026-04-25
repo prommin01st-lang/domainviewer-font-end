@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { api, unwrapPagedList } from "@/lib/api";
 import { PagedList, AppUser } from "@/lib/types";
 import { RecipientsDialog } from "./components/recipients-dialog";
 import { DomainFormDialog, DomainFormData } from "./components/domain-form-dialog";
@@ -88,7 +88,7 @@ export default function DomainsPage() {
     queryKey: ["usersList"],
     queryFn: async () => {
       const res = await api.get("/users");
-      return res.data.items;
+      return unwrapPagedList<AppUser>(res.data).items;
     },
   });
 
@@ -97,7 +97,8 @@ export default function DomainsPage() {
     queryFn: () => fetchDomains(page, pageSize, search),
   });
 
-  const domains = domainsData?.items;
+  const domainsDataUnwrapped = unwrapPagedList<Domain>(domainsData);
+  const domains = domainsDataUnwrapped.items;
 
   const createMutation = useMutation({
     mutationFn: (data: Record<string, unknown>) => api.post("/domains", data),
@@ -269,7 +270,7 @@ export default function DomainsPage() {
               <CardDescription>แสดงรายการ Domain และสถานะการจดทะเบียน</CardDescription>
             </div>
             <Badge variant="outline" className="rounded-lg px-2.5 py-0.5 bg-background font-mono text-xs">
-              {domainsData?.totalCount || 0} รายการ
+              {domainsDataUnwrapped.totalCount} รายการ
             </Badge>
           </div>
         </CardHeader>
@@ -369,11 +370,11 @@ export default function DomainsPage() {
             </div>
           )}
           <div className="p-4 border-t border-border/50 bg-muted/20">
-            {domainsData && domainsData.totalPages > 1 && (
+            {domainsDataUnwrapped.totalPages > 1 && (
               <DataTablePagination
-                pageIndex={domainsData.pageIndex}
-                totalPages={domainsData.totalPages}
-                totalCount={domainsData.totalCount}
+                pageIndex={domainsDataUnwrapped.pageIndex}
+                totalPages={domainsDataUnwrapped.totalPages}
+                totalCount={domainsDataUnwrapped.totalCount}
                 pageSize={pageSize}
                 onPageChange={setPage}
                 onPageSizeChange={(size) => { setPageSize(size); setPage(1); }}

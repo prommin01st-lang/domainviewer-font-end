@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { api, unwrapPagedList } from "@/lib/api";
 import axios from "axios";
 import {
   Card,
@@ -98,7 +98,8 @@ export default function UsersPage() {
     enabled: currentUser?.role === 0,
   });
 
-  const users = usersData?.items;
+  const usersDataUnwrapped = unwrapPagedList<User>(usersData);
+  const users = usersDataUnwrapped.items;
 
   const createUser = useMutation({
     mutationFn: async (data: {
@@ -437,11 +438,11 @@ export default function UsersPage() {
               </TableBody>
             </Table>
           )}
-          {usersData && usersData.totalPages > 1 && (
+          {usersDataUnwrapped.totalPages > 1 && (
             <DataTablePagination
-              pageIndex={usersData.pageIndex}
-              totalPages={usersData.totalPages}
-              totalCount={usersData.totalCount}
+              pageIndex={usersDataUnwrapped.pageIndex}
+              totalPages={usersDataUnwrapped.totalPages}
+              totalCount={usersDataUnwrapped.totalCount}
               pageSize={pageSize}
               onPageChange={setPage}
               onPageSizeChange={(size) => { setPageSize(size); setPage(1); }}

@@ -25,6 +25,9 @@ async function proxy(request: NextRequest, method: string) {
     headers.set(key, value);
   });
 
+  // Ensure ngrok skip warning
+  headers.set("ngrok-skip-browser-warning", "true");
+
   try {
     const body = method !== "GET" && method !== "HEAD" ? await request.arrayBuffer() : undefined;
 

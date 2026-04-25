@@ -1,4 +1,5 @@
 import axios from "axios";
+import { User, PagedList } from "@/lib/types";
 
 const api = axios.create({
   baseURL: "/api",
@@ -31,49 +32,106 @@ function isTokenExpiringSoon(): boolean {
 
 function unwrapApiResponse<T>(responseData: unknown): T {
   // Guard against HTML error pages from proxy
-  if (typeof responseData === "string") {
+  if (typeof responseData === "string" && responseData.trim().startsWith("<!DOCTYPE html>")) {
     throw new Error(
-      `Proxy returned HTML instead of JSON. Backend may be unreachable. Response: ${responseData.slice(0, 200)}`
+      `Proxy returned HTML instead of JSON. Backend may be unreachable or Ngrok warning. Response: ${responseData.slice(0, 200)}`
     );
   }
-  if (
-    responseData &&
-    typeof responseData === "object" &&
-    "success" in responseData &&
-    "data" in responseData
-  ) {
-    return (responseData as { data: T }).data;
+
+  if (responseData && typeof responseData === "object") {
+    const data = responseData as Record<string, unknown>;
+    
+    // Support both camelCase and PascalCase
+    const success = data.success !== undefined ? data.success : data.Success;
+    const resultData = data.data !== undefined ? data.data : data.Data;
+
+    if (success !== undefined && resultData !== undefined) {
+      return resultData as T;
+    }
   }
+  
   return responseData as T;
+}
+
+export function unwrapPagedList<T>(data: unknown): PagedList<T> {
+  const defaultPagedList: PagedList<T> = {
+    items: [],
+    pageIndex: 1,
+    totalPages: 1,
+    totalCount: 0,
+    hasPreviousPage: false,
+    hasNextPage: false,
+  };
+
+  if (!data || typeof data !== "object") return defaultPagedList;
+
+  const obj = data as Record<string, unknown>;
+  
+  // Support both camelCase and PascalCase
+  const items = (obj.items || obj.Items) as T[] || [];
+  const pageIndex = (obj.pageIndex || obj.PageIndex) as number || 1;
+  const totalPages = (obj.totalPages || obj.TotalPages) as number || 1;
+  const totalCount = (obj.totalCount || obj.TotalCount) as number || 0;
+  const hasPreviousPage = (obj.hasPreviousPage !== undefined ? obj.hasPreviousPage : obj.HasPreviousPage) as boolean || false;
+  const hasNextPage = (obj.hasNextPage !== undefined ? obj.hasNextPage : obj.HasNextPage) as boolean || false;
+
+  return {
+    items,
+    pageIndex,
+    totalPages,
+    totalCount,
+    hasPreviousPage,
+    hasNextPage,
+  };
 }
 
 export function ensureArray<T>(data: unknown): T[] {
   if (Array.isArray(data)) return data;
-  if (data && typeof data === "object" && "items" in data && Array.isArray((data as Record<string, unknown>).items)) {
-    return (data as Record<string, unknown>).items as T[];
+  if (data && typeof data === "object") {
+    const obj = data as Record<string, unknown>;
+    const items = obj.items || obj.Items;
+    if (Array.isArray(items)) return items as T[];
   }
-  console.warn("[API] Expected array or PagedList, got:", data);
   return [];
 }
 
-async function doRefreshToken(): Promise<string | null> {
+export interface RefreshResult {
+  accessToken: string;
+  refreshToken: string;
+  accessTokenExpiresAt: string;
+  user: User | null;
+}
+
+export async function refreshTokens(): Promise<RefreshResult | null> {
   const refreshToken = localStorage.getItem("refreshToken");
   if (!refreshToken) return null;
 
   try {
-    const response = await axios.post("/api/auth/refresh-token", { refreshToken });
-    const apiResponse = unwrapApiResponse<{
-      accessToken: string;
-      refreshToken: string;
-      accessTokenExpiresAt: string;
-    }>(response.data);
-    const { accessToken, refreshToken: newRefreshToken, accessTokenExpiresAt } = apiResponse;
+    // Use raw axios to avoid interceptor loop, or add a header
+    const response = await axios.post("/api/auth/refresh-token", 
+      { refreshToken },
+      { headers: { "X-Skip-Auth": "true" } }
+    );
+    
+    const apiResponse = unwrapApiResponse<Record<string, unknown>>(response.data);
+    
+    // Support both camelCase and PascalCase in the AuthResponse
+    const accessToken = (apiResponse.accessToken || apiResponse.AccessToken) as string;
+    const newRefreshToken = (apiResponse.refreshToken || apiResponse.RefreshToken) as string;
+    const accessTokenExpiresAt = (apiResponse.accessTokenExpiresAt || apiResponse.AccessTokenExpiresAt) as string;
+    const user = (apiResponse.user || apiResponse.User) as User | null;
+
+    if (!accessToken || !newRefreshToken) return null;
+
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", newRefreshToken);
     localStorage.setItem("accessTokenExpiresAt", accessTokenExpiresAt);
+    
     api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-    return accessToken;
-  } catch {
+    
+    return { accessToken, refreshToken: newRefreshToken, accessTokenExpiresAt, user };
+  } catch (error) {
+    console.error("[API] Refresh token failed:", error);
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("accessTokenExpiresAt");
@@ -97,10 +155,10 @@ api.interceptors.request.use(
         if (isTokenExpiringSoon() && !config.url?.includes("/auth/refresh-token")) {
           if (!isRefreshing) {
             isRefreshing = true;
-            const newToken = await doRefreshToken();
+            const result = await refreshTokens();
             isRefreshing = false;
-            if (newToken) {
-              onTokenRefreshed(newToken);
+            if (result) {
+              onTokenRefreshed(result.accessToken);
             }
           } else {
             // Another request triggered refresh; wait for it
@@ -145,10 +203,11 @@ api.interceptors.response.use(
 
       if (!isRefreshing) {
         isRefreshing = true;
-        const newToken = await doRefreshToken();
+        const result = await refreshTokens();
         isRefreshing = false;
-
-        if (newToken) {
+        
+        if (result) {
+          const newToken = result.accessToken;
           onTokenRefreshed(newToken);
           originalRequest.headers.Authorization = `Bearer ${newToken}`;
           return api(originalRequest);
