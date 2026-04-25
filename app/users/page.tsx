@@ -259,7 +259,9 @@ export default function UsersPage() {
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="เลือกบทบาท" />
+                      <SelectValue>
+                        {newUser.role === "0" ? "เจ้าของ" : newUser.role === "1" ? "พนักงาน" : "เลือกบทบาท"}
+                      </SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="0">เจ้าของ</SelectItem>

@@ -16,6 +16,7 @@ import {
   UserCircle,
   Sun,
   Moon,
+  BookOpen,
 } from "lucide-react";
 import { UserAvatar } from "@/components/user-avatar";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,7 @@ const navItems = [
   { href: "/notification-logs", label: "ประวัติแจ้งเตือน", icon: Bell, ownerOnly: true },
   { href: "/allowed-domains", label: "โดเมนที่อนุญาต", icon: Shield, ownerOnly: true },
   { href: "/settings", label: "ตั้งค่า", icon: Settings, ownerOnly: false },
+  { href: "/manual", label: "คู่มือการใช้งาน", icon: BookOpen, ownerOnly: false },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {

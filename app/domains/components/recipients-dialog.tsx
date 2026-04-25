@@ -118,7 +118,7 @@ export function RecipientsDialog({
               <p className="text-sm">ไม่มีผู้ใช้ในระบบ</p>
             </div>
           ) : (
-            users?.map((user) => (
+            users?.filter(u => u.isActive !== false).map((user) => (
               <label key={user.id} className="flex items-center space-x-3 p-3 rounded-xl hover:bg-muted cursor-pointer transition-colors border border-transparent hover:border-border group">
                 <input
                   type="checkbox"

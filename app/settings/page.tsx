@@ -20,7 +20,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Loader2, Send } from "lucide-react";
+import { Loader2, Send, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface AlertSettings {
@@ -60,6 +60,11 @@ const fetchTemplates = async (): Promise<EmailTemplate[]> => {
 
 const updateTemplate = async (type: string, data: Partial<EmailTemplate>): Promise<EmailTemplate> => {
   const response = await api.put(`/emailtemplates/${type}`, data);
+  return response.data;
+};
+
+const resetTemplate = async (type: string): Promise<EmailTemplate> => {
+  const response = await api.post(`/emailtemplates/${type}/reset`);
   return response.data;
 };
 
@@ -209,6 +214,15 @@ function EmailTemplatesForm() {
     onError: () => toast.error("ไม่สามารถบันทึกเทมเพลตได้"),
   });
 
+  const resetMutation = useMutation({
+    mutationFn: (type: string) => resetTemplate(type),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["emailTemplates"] });
+      toast.success("คืนค่าเทมเพลตเริ่มต้นสำเร็จ");
+    },
+    onError: () => toast.error("ไม่สามารถคืนค่าเทมเพลตเริ่มต้นได้"),
+  });
+
   if (!isOwner) {
     return (
       <div className="p-6 text-center text-muted-foreground italic border border-dashed rounded-2xl bg-muted/20">
@@ -262,7 +276,11 @@ function EmailTemplatesForm() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-lg">
-                    {template.type === "ExpirationAlert" ? "แจ้งเตือนวันหมดอายุ" : "รายงานรายการ Domain"}
+                    {template.type === "ExpirationAlert"
+                      ? "แจ้งเตือนวันหมดอายุ"
+                      : template.type === "ExpiredAlert"
+                      ? "แจ้งเตือน Domain หมดอายุแล้ว"
+                      : "รายงานรายการ Domain"}
                   </CardTitle>
                   <p className="text-sm text-muted-foreground mt-1">ตั้งค่ารูปแบบอีเมลที่ส่งให้ผู้ใช้งาน</p>
                 </div>
@@ -299,14 +317,29 @@ function EmailTemplatesForm() {
                   className="font-mono text-sm rounded-xl border-border/50 bg-muted/20 custom-scrollbar focus:ring-primary/20"
                 />
               </div>
-              <Button
-                onClick={() => handleSave(template)}
-                disabled={mutation.isPending}
-                className="rounded-xl px-6 h-11 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/10 transition-all active:scale-95"
-              >
-                {mutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
-                บันทึกเทมเพลต
-              </Button>
+              <div className="flex items-center gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => resetMutation.mutate(template.type)}
+                  disabled={resetMutation.isPending}
+                  className="rounded-xl px-4 h-11 border-border/50 hover:bg-muted transition-all active:scale-95"
+                >
+                  {resetMutation.isPending && resetMutation.variables === template.type ? (
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  ) : (
+                    <RotateCcw className="h-4 w-4 mr-2" />
+                  )}
+                  ค่าเริ่มต้น
+                </Button>
+                <Button
+                  onClick={() => handleSave(template)}
+                  disabled={mutation.isPending}
+                  className="rounded-xl px-6 h-11 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/10 transition-all active:scale-95"
+                >
+                  {mutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                  บันทึกเทมเพลต
+                </Button>
+              </div>
             </CardContent>
           </Card>
         );

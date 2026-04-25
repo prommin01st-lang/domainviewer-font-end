@@ -11,6 +11,7 @@ export interface AppUser {
   id: string;
   name: string;
   email: string;
+  isActive?: boolean;
 }
 
 export interface DomainRecipient {
